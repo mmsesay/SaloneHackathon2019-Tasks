@@ -170,8 +170,9 @@ def flights() -> str:
     Once you have your initial version, think about how you can
     scale your API. Also think about how you can speed it up
     """
-    start_time = 1230
-    end_time = 1500
+   
+    start_time = request.args.get('start')
+    end_time = request.args.get('end')
     return process_flights(start_time, end_time)
 
 
@@ -199,6 +200,6 @@ def coordinates() -> str:
     Once you have your initial version, think about how you can
     scale your API. Also think about how you can speed it up
     """
-    start_time = 1230
-    end_time = 1500
+    start_time = request.args.get('start')
+    end_time = request.args.get('end')
     return process_coordinates(start_time, end_time)
