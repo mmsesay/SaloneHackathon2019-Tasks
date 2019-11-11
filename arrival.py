@@ -31,7 +31,7 @@ def arrivals(airport):
         if estDept == None:
             print('--------------------------------------------------')
             print('{} airport doesn\'t have an estimated departure\
-        so the marker will just be at the arrival airport'.format(estDept))
+        so the marker will just be at the arrival airport'.format(estArrival))
 
         print('Departure AirPort: {} - Arrival Airport: {}'.format(estDept,estArrival))
         print('--------------------------------------------------')
@@ -62,8 +62,8 @@ def arrivals(airport):
         # generating a Scattermapbox
         fig = go.Figure(go.Scattermapbox(
             mode = "markers+lines",
-            lat = [depart_lat,arrival_lat],
-            lon = [depart_lon, arrival_lon],
+            lat = [arrival_lat,depart_lat],
+            lon = [arrival_lon,depart_lon],
 
             # set the marker size
             marker = {'size': 10}
