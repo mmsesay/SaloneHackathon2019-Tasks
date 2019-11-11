@@ -87,7 +87,7 @@ def departures(airport):
         print('{} is not part of opensky\'s api'.format(airport))
 
     
-departures("EGLL")
+departures("LSGG")
 # EDDK
 # LSGG -> LHBP (found)
 # EGLL -> KLAS (found)

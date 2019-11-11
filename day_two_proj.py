@@ -4,7 +4,7 @@ import logging
 from typing import List, Tuple, Dict, Optional
 import time
 import re
-import pymysql
+# import pymysql
 import requests
 import json
 import pprint
@@ -133,22 +133,32 @@ def process_flights(start_time: int, end_time: int) -> List[Dict[str, str]]:
     The shouldn't be duplicates in your json returned. 
     """
 
-    output = []
+    tempList = []
+    newList = []
     fetchedData = call_api(airport)
     logging.info('The data is {fetchedData}')
     
     print('previous list length :' + str(len(fetchedData)))
-    estDept = fetchedData[0]['estDepartureAirport']
-    estArrival = fetchedData[0]['estArrivalAirport']
 
-    # output variable
-    output = [
-        {'departure_airport': estDept},
-        {'departure_airport': estArrival}
-    ]
+    # loop through the data
+    for f in fetchedData:
+        # store the estDepartureAirport and estArrivalAirport values
+        deptarture_airport = f['estDepartureAirport']
+        arrival_airport = f['estArrivalAirport']
 
-    print('final list length :' + str(len(estDept)))
-    return json.dumps(output)
+        # append to data to the tempList
+        tempList.append(
+            {deptarture_airport: arrival_airport}
+        )
+
+        # loop through the dictionary in the tempList
+        for pairs in tempList:
+            # check if pairs doesn't exists and append them to the newList
+            if pairs not in newList:
+                newList.append(pairs) 
+
+    print('final list length :' + str(len(newList)))
+    return json.dumps(newList)
 
 @app.route('/')
 def index() -> str:
