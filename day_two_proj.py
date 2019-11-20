@@ -2,6 +2,7 @@ from flask import Flask, request
 from datetime import datetime, date
 import logging
 from typing import List, Tuple, Dict, Optional
+import plotly.graph_objects as go
 import time
 import re
 # import pymysql
@@ -24,6 +25,7 @@ start_time = 3600 * 48  # 48 hours
 airport = "EDDF"  # Frankfurt
 
 filename = './airports.csv'
+
 
 def read_airport(filename: str) -> Dict[str, str]:
     keys = [
@@ -119,7 +121,6 @@ def process_coordinates(start_time: int, end_time: int) -> List[Dict[str, str]]:
         print('--------------------------------------------------')
         logging.info(f'depature airport {estDept} or arrival {estArrival} is not found')
     
-    
     return json.dumps(output)
 
 def process_flights(start_time: int, end_time: int) -> List[Dict[str, str]]:
@@ -159,6 +160,7 @@ def process_flights(start_time: int, end_time: int) -> List[Dict[str, str]]:
 
     print('final list length :' + str(len(newList)))
     return json.dumps(newList)
+
 
 @app.route('/')
 def index() -> str:
